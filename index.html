@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NÖRKA | Diseño en movimiento</title>
+  <meta name="description" content="NÖRKA diseña camperas femeninas originales: deportivas, urbanas y de evento. Modelos exclusivos en cantidad limitada. Envíos en Salta capital.">
+  <meta name="keywords" content="camperas mujer, diseño de camperas, camperas originales, abrigos mujer, moda mujer argentina, camperas diseño, norka">
+  <meta name="author" content="NÖRKA">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="NÖRKA | Diseño en movimiento">
+  <meta property="og:description" content="Camperas femeninas de diseño original. Deportivo • Urbano • Evento.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/hero.jpg">  
+<!-- favicon-->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="stylesheet" href="./style/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="./assets/logo_norka-removebg.png" alt="Logo NÖRKA">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">
+      ☰
+    </div>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./pages/catalogo.html">Catálogo</a></li>
+        <li><a href="#concepto">Concepto</a></li>
+        <li><a href="#personalizados">Personalizados</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>NÖRKA</h1>
+        <p>Diseño en movimiento</p>
+        <a href="./pages/catalogo.html" class="btn">Ver colección</a>
+      </div>
+  </section>
+  <section class="lookbook">
+    <h2>Lookbook</h2>
+    <div class="lookbook-carousel">
+      <button class="look-btn prev">&#10094;</button>
+      <div class="look-viewport">
+        <div class="look-track">
+          <img src="./assets/car1.jpg" alt="Look Norka">
+          <img src="./assets/car2.jpg" alt="Look Norka">
+          <img src="./assets/car3.jpg" alt="Look Norka">   
+          <img src="./assets/car4.jpg" alt="Look Norka"> 
+          <img src="./assets/car5.jpg" alt="Look Norka">
+          <img src="./assets/car6.jpg" alt="Look Norka">
+        </div>
+      </div>
+      <button class="look-btn next">&#10095;</button>
+    </div>
+  </section>
+  <section id="concepto" class="concepto">
+    <h2>Concepto</h2>
+    <p>
+      Cada abrigo NÖRKA nace de la idea de movimiento.
+      Diseños pensados para mujeres activas que buscan
+      algo distinto, con identidad y personalidad.
+    </p>
+    <p>
+      Producción en cantidades limitadas para mantener
+      la exclusividad de cada modelo.
+    </p>
+  </section>
+  <section id="personalizados" class="personalizados">
+    <h2>Abrigos personalizados</h2>
+    <p>
+      También confeccionamos abrigos a medida.
+      Podés elegir modelo, tela y detalles.
+    </p>
+    <p>
+      Una prenda única pensada para vos.
+    </p>
+  </section>
+  <section id="contacto" class="contacto">
+    <h2>Pedidos</h2>
+    <p>
+      Pedidos y consultas por mensaje directo en Instagram.
+    </p>
+    <a class="btn" href="#">
+      Enviar mensaje
+    </a>
+    <p class="entrega">
+      Entregas a domicilio en Salta Capital
+    </p>
+  </section>
+  <footer>
+    <p>
+      © 2026 NÖRKA — Diseño en movimiento
+    </p>
+  </footer>
+  <script>
+    const toggle = document.getElementById("menu-toggle");
+    const nav = document.getElementById("nav-links");
+    toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    });
+  </script>
+  <div class="social-float">
+    <a href="https://www.instagram.com/norka.dem?igsh=bjJlcTJmZjZnMno%3D" target="_blank">
+      <img src="./assets/icons8-instagram-48(1).png" alt="Instagram">
+    </a>
+    <a href="https://wa.me/5491164838151" target="_blank">
+      <img src="./assets/icons8-whatsapp-48.png" alt="WhatsApp">
+    </a>
+  </div>
+  <script>
+    const track = document.querySelector(".look-track");
+    const slides = document.querySelectorAll(".look-track img");
+    const next = document.querySelector(".next");
+    const prev = document.querySelector(".prev");
+    let index = 0;
+    let visibleSlides = window.innerWidth < 768 ? 1 : 3;
+    function slideWidth() {
+      return slides[0].getBoundingClientRect().width + 20; 
+      // 20 = gap del CSS
+    }
+    function maxIndex() {
+      return slides.length - visibleSlides;
+    }
+    function updateCarousel() {
+      const offset = index * slideWidth();
+      track.style.transform = `translateX(-${offset}px)`;
+      slides.forEach(slide => slide.classList.remove("active"));
+      if (visibleSlides === 3 && slides[index + 1]) {
+        slides[index + 1].classList.add("active");
+      }
+    }
+  
+    /* BOTONES */
+    next.addEventListener("click", () => {
+      if (index < maxIndex()) {
+        index++;
+        updateCarousel();
+      }
+    });
+    prev.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        updateCarousel();
+      }
+    });
+  
+    /* SWIPE TOUCH */
+    let startX = 0;
+    let endX = 0;
+    track.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+    track.addEventListener("touchend", e => {
+      endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        if (index < maxIndex()) {
+          index++;
+          updateCarousel();
+        }
+      }
+      if (endX - startX > 50) {
+        if (index > 0) {
+          index--;
+          updateCarousel();
+        }
+      }
+    });
+  
+    /* RESPONSIVE */
+    window.addEventListener("resize", () => {
+      visibleSlides = window.innerWidth < 768 ? 1 : 3;
+      index = 0;
+      updateCarousel();
+    });
+    updateCarousel();
+  </script>
+</body>
+</html>
